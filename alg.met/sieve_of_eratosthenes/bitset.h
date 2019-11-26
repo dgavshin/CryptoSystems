@@ -5,7 +5,7 @@
 # include <stdio.h>
 # include "libft.h"
 
-unsigned long int       s_bits_ul;
+unsigned long long int  s_bits_ul;
 char                    *s_bits_str;
 size_t                  s_len;
 
@@ -13,7 +13,8 @@ typedef struct
 {
     void                (*set)(void);
     void                (*reset)(void);
-    /* void                (*reset_bit)(size_t); */
+    char                (*is_true)(size_t);
+    // void             (*reset_bit)(size_t);
     int                 (*test)(size_t);
     int                 (*set_bit)(size_t);
     size_t              (*size)();
@@ -38,8 +39,16 @@ static int                  set_bit(size_t n)
     if (n > s_len)
         return (0);
     s_bits_ul |= 1 << (n - 1);
-    s_bits_str[s_len - n] = '1';
+    //s_bits_str[s_len - n] = '1';
     return (1);
+}
+
+static char                 is_true(size_t n)
+{
+    if (n > s_len)
+        return (0);
+    return (s_bits_str[n]);
+    //return (s_bits_ul >> n) & 1;
 }
 
 static int                  test(size_t n)
@@ -86,6 +95,7 @@ void                        set_funcs(Bitset *bitset)
     bitset->set_bit = &set_bit;
     bitset->test = &test;
     bitset->size = &size;
+    bitset->is_true = &is_true;
     bitset->to_string = &to_string;
     bitset->to_ulong = &to_ulong;
 }
