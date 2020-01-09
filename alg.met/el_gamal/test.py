@@ -1,5 +1,8 @@
-import elgamal
-from binascii import unhexlify
+#!/usr/bin/env python3
+# -- coding: utf-8 --
+
+from elgamal import *
+
 
 def menu():
     print()
@@ -9,7 +12,8 @@ def menu():
     print('[4] Exit')
     return input()
 
-elg = elgamal.generate(1024) # 1024 default
+
+elg = Generate()  # 1024 default
 
 while True:
     choice = menu()
@@ -19,7 +23,7 @@ while True:
         print('\nEncrypted: ' + str(elg.encrypt(m)))
 
     elif choice == '2':
-        print('\nCiphertext > ')
+        print('\nCipher > ')
         a = int(input('a > ').strip())
         b = int(input('b > ').strip())
         m = elg.decrypt(a, b)

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from RSA import *
+from rabin import *
 
 
 def menu():
@@ -11,23 +11,23 @@ def menu():
     return input()
 
 
-rsa = Generate(1024)  # 1024 default
+rabin = Generate()  # 1024 default
 
 while True:
     choice = menu()
 
     if choice == '1':
         m = input('\nPlaintext > ').strip()
-        print('\nEncrypted: ' + str(rsa.encrypt(m)))
+        print('\nEncrypted: ' + str(rabin.encrypt(m)))
 
     elif choice == '2':
         c = input('\nCipher > ').strip()
-        m = rsa.decrypt(c)
-        print('\nDecrypted: ' + m)
+        m = rabin.decrypt(c)
+        print(f'\nDecrypted: {m}')
 
     elif choice == '3':
-        e, n, q, p, d = rsa.get_parameters()
-        print(f"e = {e}\nn = {n}\nq = {q}\np = {p}\nd = {d}")
+        q, p, n = rabin.q, rabin.p, rabin.n
+        print(f"n = {n}\nq = {q}\np = {p}")
 
     elif choice == '4':
         print('Bye!')
