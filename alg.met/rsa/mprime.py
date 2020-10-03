@@ -1,1 +1,0 @@
-/home/shokking/work/vuz/alg.met/mprime.py
